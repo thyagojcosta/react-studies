@@ -1,25 +1,23 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from 'react';
 
-import "./styles.css";
+import './styles.css';
 
-import { loadPosts } from "../../utils/load-posts";
-import { Posts } from "../../components/Posts";
-import { Button } from "../../components/Button";
-import { TextInput } from "../../components/TextInput";
+import { loadPosts } from '../../utils/load-posts';
+import { Posts } from '../../components/Posts';
+import { Button } from '../../components/Button';
+import { TextInput } from '../../components/TextInput';
 
 export const Home = () => {
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
   const [postsPerPage] = useState(10);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   const noMorePosts = page + postsPerPage >= allPosts.length;
 
-  const filteredPosts = !!searchValue
-    ? allPosts.filter((posts) =>
-        posts.title.toLowerCase().includes(searchValue.toLocaleLowerCase())
-      )
+  const filteredPosts = searchValue
+    ? allPosts.filter((posts) => posts.title.toLowerCase().includes(searchValue.toLocaleLowerCase()))
     : posts;
 
   useEffect(() => {
@@ -58,13 +56,9 @@ export const Home = () => {
 
       {filteredPosts.length > 0 && <Posts posts={filteredPosts} />}
       <br />
-      {filteredPosts.length === 0 && (
-        <p>Não existem posts relacionados a pesquisa...</p>
-      )}
+      {filteredPosts.length === 0 && <p>Não existem posts relacionados a pesquisa...</p>}
       <div className="button-container">
-        {!searchValue && (
-          <Button disabled={noMorePosts} onClick={loadMorePosts} />
-        )}
+        {!searchValue && <Button disabled={noMorePosts} onClick={loadMorePosts} />}
       </div>
     </section>
   );
