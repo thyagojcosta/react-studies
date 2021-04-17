@@ -11,7 +11,7 @@ export const Home = () => {
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(2);
   const [searchValue, setSearchValue] = useState('');
 
   const noMorePosts = page + postsPerPage >= allPosts.length;
@@ -22,6 +22,7 @@ export const Home = () => {
 
   useEffect(() => {
     handleLoadPosts(0, postsPerPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postsPerPage]);
 
   const handleLoadPosts = useCallback(async (page, postsPerPage) => {
